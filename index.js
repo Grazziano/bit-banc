@@ -4,13 +4,20 @@ class Cliente {
   rg;
 }
 
+// https://github.com/tc39/proposal-class-fields#private-fields
 class ContaCorrente {
   agencia;
-  saldo;
+  _saldo = 0;
 
   sacar(valor) {
-    if (this.saldo >= valor) {
-      this.saldo -= valor;
+    if (this._saldo >= valor) {
+      this._saldo -= valor;
+    }
+  }
+
+  depositar(valor) {
+    if (valor > 0) {
+      this._saldo += valor;
     }
   }
 }
@@ -27,11 +34,11 @@ cliente2.nome = 'Alice';
 cliente2.cpf = 88822233309;
 
 const contaCorrenteRicardo = new ContaCorrente();
-contaCorrenteRicardo.saldo = 0;
 contaCorrenteRicardo.agencia = 1001;
 console.log(contaCorrenteRicardo.saldo);
 
-contaCorrenteRicardo.saldo = 100;
+contaCorrenteRicardo.depositar(100);
+contaCorrenteRicardo.depositar(200);
 let valorSacado = 50;
 
 contaCorrenteRicardo.sacar(valorSacado);
