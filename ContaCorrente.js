@@ -1,10 +1,15 @@
-import { Cliente } from './Cliente';
+import { Cliente } from './Cliente.js';
 
 // https://github.com/tc39/proposal-class-fields#private-fields
 export class ContaCorrente {
   agencia;
   _cliente;
   _saldo = 0;
+
+  constructor(cliente, agencia) {
+    this.agencia = agencia;
+    this.cliente = cliente;
+  }
 
   sacar(valor) {
     if (this._saldo >= valor) {
