@@ -1,8 +1,9 @@
+import { Cliente } from './Cliente';
+
 // https://github.com/tc39/proposal-class-fields#private-fields
 export class ContaCorrente {
   agencia;
-  cliente;
-
+  _cliente;
   _saldo = 0;
 
   sacar(valor) {
@@ -10,6 +11,20 @@ export class ContaCorrente {
       this._saldo -= valor;
       return this._saldo;
     }
+  }
+
+  get cliente() {
+    return this._cliente;
+  }
+
+  set cliente(novoValor) {
+    if (novoValor instanceof Cliente) {
+      this._cliente = novoValor;
+    }
+  }
+
+  get saldo() {
+    return this._saldo;
   }
 
   depositar(valor) {
